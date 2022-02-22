@@ -1,0 +1,8 @@
+.flex {
+display: flex;
+justify-content: space-between;
+}
+
+.high-scores {
+    padding-top: 15px;
+}
