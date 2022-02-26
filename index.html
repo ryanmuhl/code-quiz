@@ -14,42 +14,29 @@
 </header>
 
 <body>
-    <section class="section-container">
-    <div class="button">
-        <button class="button-style" id="button">Start Quiz</button>
-    </div>
-    <div>
-        <h2 Class="dom">What does DOM stand for:</h2>
-        <ul>
-            <li>Domaign Ordered Material</li>
-            <li>Design Oriented Method </li>
-            <li>Destination Of Main</li>
-            <li>Document Object Model</li>
-        </ul>
-    </div>
+    <section class="section-container" id="section">
+        <div id="main-content">
+            <div class="welcome">
+                <h1>Welcome to CODE QUIZ. Please select "Start Quiz" to begin.</h1>
+                <h4>This is a multiple choice quiz. Your quiz will be timed. If answer is wrong, time will be deducted
+                    from overall time. If answer is right, time will be added.</h4>
+            </div>
 
+            <div class="start-button" id="start-button">
+                <button id="start-quiz">Start Quiz</button>
+            </div>
+        </div>
 
-    <div>
-        <h2 Class="data-types">Commonly used data types do not include:</h2>
-        <ul>
-            <li>Strings</li>
-            <li>Booleans</li>
-            <li>Alerts</li>
-            <li>numbers</li>
-        </ul>
+    </section>
+
+    <div class="hide" id="question-list">
+        <h2 id="question-title"></h2>
+        <div class="center">
+            <button id="button1"></button>
+            <button id="button2"></button>
+            <button id="button3"></button>
+        </div>
     </div>
-
-    <div>
-        <h2 Class="json">What does JSON stand for:</h2>
-        <ul>
-            <li>JavaScript Object Notation</li>
-            <li>JavaScript One Note  </li>
-            <li>Java String Order Number</li>
-            <li>JavaScript Order Number</li>
-        </ul>
-    </div>
-</section>
-
 
 
     <script src="./assets/js/script.js"></script>
