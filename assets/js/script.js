@@ -65,11 +65,13 @@ function startQuiz() {
         console.log (event)
     
      if (event.target === button2Q1) {
-        alert ("hello")
+        right.textContent = "Right Answer"
+        right.removeAttribute ("class", "no-buerno")
      }
 
      else {
-         alert ("goodbye")
+        right.textContent = "Wrong Answer"
+        right.removeAttribute ("class", "no-buerno")
      }
     
 
