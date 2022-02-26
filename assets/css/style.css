@@ -19,3 +19,7 @@ justify-content: space-between;
     align-items: flex-start;
     row-gap: 5px;
 }
+
+.no-bueno {
+    display: none;
+}
