@@ -34,8 +34,11 @@ var quizQuestions = [
       },
     
     ];
+    
 
-function startQuiz() {
+start.addEventListener("click", startQuiz)
+function startQuiz(e) {
+
     var mainHide = document.getElementById ("section")
     mainHide.setAttribute ("style", "display: none")
     var questionList = document.getElementById ("question-list")
@@ -43,6 +46,10 @@ function startQuiz() {
     currentQuestion = quizQuestions[index]
     populateQuestion ()
     
+    
+    if (e.target) {
+        countdown ()
+    }
    
     
 
@@ -82,6 +89,7 @@ function startQuiz() {
         index++;
         timeLeft = timeLeft -5;
      }
+     
      startQuiz ()
 }
 
@@ -130,8 +138,9 @@ function displayMessage() {
     var wordCount = 0
 }
 
-countdown ();
+
+
 displayMessage() 
 //FUNCTION SELECT BUTTON AND CLEAR <SECTION> CONTAINER
-start.addEventListener("click", startQuiz)
+
   
