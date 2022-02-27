@@ -17,19 +17,19 @@ var quizQuestions = [
 
     {
         title: "What does DOM stand for:",
-        choices: ["1) Domain Object Model", "2) Document Object Model", "3) Developer Oriented Model"],
+        choices: ["Domain Object Model", "Document Object Model", "Developer Oriented Model"],
         answer: "Document Object Model"
     },
     
     {
         title: "What does JSON stand for:",
-        choices: ["1) JavaScript Object Nation", "2) JavaScript Object Number", "3) JavaScript Object Notation"],
+        choices: ["JavaScript Object Nation", "JavaScript Object Number", "JavaScript Object Notation"],
         answer: "JavaScript Object Notation"
       },
     
       {
         title: "Which below is not the proper way of declaring a variable in JavaScript:",
-        choices: ["1) var", "2) inv", "3) let"],
+        choices: ["var", "inv", "let"],
         answer: "inv"
       },
     
@@ -38,7 +38,6 @@ var quizQuestions = [
 function startQuiz() {
     var mainHide = document.getElementById ("section")
     mainHide.setAttribute ("style", "display: none")
-    countdown ();
     var questionList = document.getElementById ("question-list")
     questionList.removeAttribute ("class", "hide")
     currentQuestion = quizQuestions[index]
@@ -66,15 +65,14 @@ function startQuiz() {
     button3.addEventListener ("click", assessAnswers);
 
     function assessAnswers (event) {
-        
+        console.log (event)
     
-     if (event.target === button2) {
+     if (event.target.innerHTML === currentQuestion.answer) {
         
         right.textContent = "Right Answer"
         right.removeAttribute ("class", "no-bueno")
         index++;
-        
-
+        timeLeft= timeLeft + 5;
     } 
     
     else {
@@ -82,6 +80,7 @@ function startQuiz() {
         right.textContent = "Wrong Answer"
         right.removeAttribute ("class", "no-bueno")
         index++;
+        timeLeft = timeLeft -5;
      }
      startQuiz ()
 }
@@ -131,6 +130,7 @@ function displayMessage() {
     var wordCount = 0
 }
 
+countdown ();
 displayMessage() 
 //FUNCTION SELECT BUTTON AND CLEAR <SECTION> CONTAINER
 start.addEventListener("click", startQuiz)
