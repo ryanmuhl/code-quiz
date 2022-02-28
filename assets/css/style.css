@@ -23,3 +23,17 @@ justify-content: space-between;
 .no-bueno {
     display: none;
 }
+
+.container-flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: left;
+    column-gap: 20px;
+    align-items: baseline;
+
+}
+
+.container-flex INPUT {
+    height: 20px;
+}

@@ -1,4 +1,5 @@
 //Start Global variables/Elements 
+    var body =document.body    
     var timer = document.getElementById('countdown');
     var start = document.querySelector("#start-quiz");
     var index = 0;
@@ -13,7 +14,7 @@
     button3.addEventListener ("click", assessAnswers);
     start.addEventListener("click", startQuiz)
     var currentQuestion;
-    var points;
+    var questionList = document.getElementById ("question-list")
 
 
 
@@ -36,76 +37,83 @@
         choices: ["var", "inv", "let"],
         answer: "inv"
       },
+      
+      {
+        ques: "What is Ryan Uhl's favorite color:",
+        choices: ["green", "orange", "yellow"],
+        answer: "green"
+    },
     
     ];
-//End Global variables/Elements   
+//End Global variables/Elements  
+
+function assessAnswers (event) {
+        
+    
+    if (event.target.innerHTML === currentQuestion.answer) {
+        
+        // right.textContent = "Right Answer"
+        // right.removeAttribute ("class", "no-bueno")
+        index = index + 1;
+        timeLeft= timeLeft + 5;
+    } 
+    
+    
+    if (event.target.innerHTML != currentQuestion.answer) {
+        
+        // right.textContent = "Wrong Answer"
+        // right.removeAttribute ("class", "no-bueno")
+        index = index + 1;
+        timeLeft = timeLeft -10;
+     }
+
+     if (index > 3) {
+        questionList.setAttribute ("style", "display: none")
+        return null;
+        
+     }
+     startQuiz ()
+     
+}
+//End assessAnswers Function
 
 
 
 //Function to start quiz and hide main section/welcome screen
 //also removes hidden display hidden for class hide
 //Populate Question function called within startQuiz function
-//if start button selected countdown function called
-function startQuiz(event) {
 
+function startQuiz() {
+    
     var mainHide = document.getElementById ("section")
     mainHide.setAttribute ("style", "display: none")
-    var questionList = document.getElementById ("question-list")
+    
     questionList.removeAttribute ("class", "hide")
     currentQuestion = quizQuestions[index]
-    populateQuestion ()
+    
+    button1.textContent=currentQuestion.choices[0];
+    button2.textContent=currentQuestion.choices[1];
+    button3.textContent=currentQuestion.choices[2];
+    questionTitle.textContent=currentQuestion.ques;
+
     
     
-    if (event.target) {
-        countdown ()
-    }
-    }
+}
 //End startQuiz Function
 
 
-//Function to populate question and answers 
-function populateQuestion () {
-
-        button1.textContent=currentQuestion.choices[0];
-        button2.textContent=currentQuestion.choices[1];
-        button3.textContent=currentQuestion.choices[2];
-        questionTitle.textContent=currentQuestion.ques;
-    }
-//End populateQuestions Function
-    
     
 //Function to assess answers
 //displays Right or Wrong Answer when button selected
 //clears current questions once button selected and starts new set of questions
 //adds or removes time based on Right or Wrong answer
-function assessAnswers (event) {
-        console.log (event)
-    
-     if (event.target.innerHTML === currentQuestion.answer) {
-        
-        right.textContent = "Right Answer"
-        right.removeAttribute ("class", "no-bueno")
-        index++;
-        timeLeft= timeLeft + 5;
-    } 
-    
-    else {
-        
-        right.textContent = "Wrong Answer"
-        right.removeAttribute ("class", "no-bueno")
-        index++;
-        timeLeft = timeLeft -5;
-     }
-     
-     startQuiz ()
-}
-//End assessAnswers Function
+
 
 
 //Function that Decrements time by 1 second
 function countdown () {
     var timeInterval = setInterval(function () {
-    
+        
     if (timeLeft > 0) {
 
         timer.textContent = timeLeft + ' seconds remaining';
@@ -116,20 +124,19 @@ function countdown () {
         timeLeft--;
         
     }else {
-        timer.textcontent = '';
-        alert ("See Quiz Results")
-        clearInterval(timeInterval);
+        var quesListHide = document.getElementById ("question-list")
+        quesListHide.setAttribute ("style", "display: none")
+        timer.textContent = '';
+        clearInterval(timeInterval); 
+        
+        
     }
+    
 }, 1000);
 }
+countdown ()
 //End Countdown Function
 
-//Function to display time remaining
-function displayMessage() {
-    var wordCount = 0
-    displayMessage() 
-}
-//End Display Message Function
 
 
 //variable to represent current question I am within
@@ -139,4 +146,4 @@ function displayMessage() {
 //populate buttons
 
 
-  
+
