@@ -36,7 +36,7 @@ ryanmuhl.github.io/code-quiz/
 https://github.com/ryanmuhl/code-quiz
 
 ## Screenshot
-![Challenge Screenshot](https://github.com/ryanmuhl/code-quiz/blob/main/assets/images/screeenshot.PNG.jpg)
+![Challenge Screenshot](https://github.com/ryanmuhl/code-quiz/blob/main/assets/images/screenshot.png.jpg)
 
 ## Contribution
 Created/Designed by Ryan M. Uhl
