@@ -47,6 +47,11 @@
     ];
 //End Global variables/Elements  
 
+
+//Function to assess answers
+//displays Right or Wrong Answer when button selected
+//clears current questions once button selected and starts new set of questions
+//adds or removes time based on Right or Wrong answer
 function assessAnswers (event) {
         
     
@@ -74,6 +79,7 @@ function assessAnswers (event) {
      }
      startQuiz ()
      
+     
 }
 //End assessAnswers Function
 
@@ -84,6 +90,7 @@ function assessAnswers (event) {
 //Populate Question function called within startQuiz function
 
 function startQuiz() {
+    countdown ()
     
     var mainHide = document.getElementById ("section")
     mainHide.setAttribute ("style", "display: none")
@@ -96,17 +103,12 @@ function startQuiz() {
     button3.textContent=currentQuestion.choices[2];
     questionTitle.textContent=currentQuestion.ques;
 
-    
-    
 }
 //End startQuiz Function
 
 
     
-//Function to assess answers
-//displays Right or Wrong Answer when button selected
-//clears current questions once button selected and starts new set of questions
-//adds or removes time based on Right or Wrong answer
+
 
 
 
@@ -134,7 +136,7 @@ function countdown () {
     
 }, 1000);
 }
-countdown ()
+
 //End Countdown Function
 
 
