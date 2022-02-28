@@ -30,7 +30,7 @@ Create a timed quiz on JavaScript fundamentals that stores high scores.
 
 
 ## Website
-ryanmuhl.github.io/code-quiz/
+https://ryanmuhl.github.io/code-quiz/
 
 ## Repository
 https://github.com/ryanmuhl/code-quiz
