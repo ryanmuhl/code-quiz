@@ -45,44 +45,10 @@
     },
     
     ];
-//End Global variables/Elements  
+//End Global variables/Elements 
 
 
-//Function to assess answers
-//displays Right or Wrong Answer when button selected
-//clears current questions once button selected and starts new set of questions
-//adds or removes time based on Right or Wrong answer
-function assessAnswers (event) {
-        
     
-    if (event.target.innerHTML === currentQuestion.answer) {
-        
-        // right.textContent = "Right Answer"
-        // right.removeAttribute ("class", "no-bueno")
-        index = index + 1;
-        timeLeft= timeLeft + 5;
-    } 
-    
-    
-    if (event.target.innerHTML != currentQuestion.answer) {
-        
-        // right.textContent = "Wrong Answer"
-        // right.removeAttribute ("class", "no-bueno")
-        index = index + 1;
-        timeLeft = timeLeft -10;
-     }
-
-     if (index > 3) {
-        questionList.setAttribute ("style", "display: none")
-        return null;
-        
-     }
-     startQuiz ()
-     
-     
-}
-//End assessAnswers Function
-
 
 
 //Function to start quiz and hide main section/welcome screen
@@ -91,27 +57,65 @@ function assessAnswers (event) {
 
 function startQuiz() {
     countdown ()
+    nextQuestion ()
+}  
+//End startQuiz Function
+
+
+//Function to assess answers
+//displays Right or Wrong Answer when button selected
+//clears current questions once button selected and starts new set of questions
+//adds or removes time based on Right or Wrong answer
+function assessAnswers (event) {
+    
+    
+    
+    if (event.target.innerHTML === currentQuestion.answer) {
+        right.textContent = "Right Answer"
+        right.removeAttribute ("class", "no-bueno")
+        timeLeft= timeLeft + 20;
+        index = index +1
+        nextQuestion ()
+        
+    } 
+    
+    else {
+        
+        right.textContent = "Wrong Answer"
+        right.removeAttribute ("class", "no-bueno")
+        timeLeft = timeLeft -20;
+        index = index +1
+        nextQuestion ()
+        
+        
+     }
+
+    
+     
+}
+//End assessAnswers Function
+
+function nextQuestion () {
+
+    currentQuestion = quizQuestions[index]
+    button1.textContent=currentQuestion.choices[0];
+    button2.textContent=currentQuestion.choices[1];
+    button3.textContent=currentQuestion.choices[2];
+    questionTitle.textContent=currentQuestion.ques; 
+
+    
     
     var mainHide = document.getElementById ("section")
     mainHide.setAttribute ("style", "display: none")
     
     questionList.removeAttribute ("class", "hide")
-    currentQuestion = quizQuestions[index]
-    
-    button1.textContent=currentQuestion.choices[0];
-    button2.textContent=currentQuestion.choices[1];
-    button3.textContent=currentQuestion.choices[2];
-    questionTitle.textContent=currentQuestion.ques;
+
+    if (index > 4) {
+        return null;
+    }
 
 }
-//End startQuiz Function
-
-
-    
-
-
-
-
+  
 //Function that Decrements time by 1 second
 function countdown () {
     var timeInterval = setInterval(function () {
@@ -135,6 +139,7 @@ function countdown () {
     }
     
 }, 1000);
+
 }
 
 //End Countdown Function
