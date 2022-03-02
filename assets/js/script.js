@@ -58,6 +58,7 @@
 function startQuiz() {
     countdown ()
     nextQuestion ()
+    
 }  
 //End startQuiz Function
 
@@ -74,25 +75,32 @@ function assessAnswers (event) {
         right.textContent = "Right Answer"
         right.removeAttribute ("class", "no-bueno")
         timeLeft= timeLeft + 20;
-        index = index +1
+        index = index + 1
         nextQuestion ()
+        stopQuiz ()
+    }
         
-    } 
+     
     
-    else {
+     else {
         
         right.textContent = "Wrong Answer"
         right.removeAttribute ("class", "no-bueno")
         timeLeft = timeLeft -20;
         index = index +1
         nextQuestion ()
+        stopQuiz ()
         
-        
-     }
+    }
 
-    
-     
 }
+
+function stopQuiz () {
+    
+    
+}
+  
+
 //End assessAnswers Function
 
 function nextQuestion () {
@@ -110,14 +118,13 @@ function nextQuestion () {
     
     questionList.removeAttribute ("class", "hide")
 
-    if (index > 4) {
-        return null;
-    }
+    
 
 }
   
 //Function that Decrements time by 1 second
 function countdown () {
+    
     var timeInterval = setInterval(function () {
         
     if (timeLeft > 0) {
