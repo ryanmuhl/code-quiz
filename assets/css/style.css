@@ -38,3 +38,11 @@ justify-items: auto;
 .container-flex INPUT {
     height: 20px;
 }
+
+.form-style {
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+    align-items: baseline;
+    column-gap: 10px;
+}
