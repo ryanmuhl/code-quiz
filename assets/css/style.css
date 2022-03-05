@@ -46,3 +46,14 @@ justify-items: auto;
     align-items: baseline;
     column-gap: 10px;
 }
+
+.display-scores {
+    display: none;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    
+}

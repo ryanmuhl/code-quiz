@@ -14,15 +14,11 @@ button2.addEventListener("click", assessAnswers);
 button3.addEventListener("click", assessAnswers);
 start.addEventListener("click", startQuiz)
 var currentQuestion;
+var timeInterval;
 var quesListHide = document.getElementById("question-list")
 
 
-
-
-var allDone = document.createElement("h1")
-var container = document.createElement("form")
-var h1El = document.createElement("h3")
-var endQuizButton = document.getElementById ("submit")
+var endQuizButton = document.getElementById("submit")
 endQuizButton.textContent = "End Quiz"
 
 
@@ -103,28 +99,10 @@ function assessAnswers(event) {
 
 }
 
-function inputForm() {
-
-    var inputForm = document.getElementById ("input-form")
-    inputForm.removeAttribute ("class", "hide")
-
-    
-    
-    quesListHide.remove()
-
-    
-
-}
-
-
-
-
-//End assessAnswers Function
-
 function nextQuestion() {
 
     if (index >= quizQuestions.length) {
-
+        clearInterval(timeInterval);
         inputForm()
 
     }
@@ -148,17 +126,69 @@ function nextQuestion() {
     }
 }
 
-function saveInitials () {
-    var inputForm = document.getElementById ("input-field");
-    var inputData = inputForm.value
-    console.log (inputData)
-    console.log (inputForm)
-    console.log ("working")
+function inputForm() {
+
+    var inputForm = document.getElementById("input-form")
+    inputForm.removeAttribute("class", "hide")
+
+
+    quesListHide.remove()
+
+    var formContainer = document.getElementById("form-container")
+
+    formContainer.append("Score:   " + timeLeft)
+
 }
 
-function endQuiz (event) {
-    event.preventDefault ()
-    saveInitials ()
+
+function saveInitials() {
+    var inputField = document.getElementById("input-field");
+    var inputForm = document.getElementById("input-form")
+
+    var inputData = inputField.value
+    console.log(inputData)
+    console.log(allInfo)
+
+    var allInfo = {
+
+        initials: inputData,
+        score: timeLeft,
+
+    }
+
+    window.localStorage.setItem("user", JSON.stringify(allInfo));
+
+
+
+    if (allInfo) {
+
+
+
+
+
+
+        // var dataAll = document.createElement ('p')
+        var dataInitials = (window.localStorage.getItem('user'))
+
+
+
+        console.log()
+
+
+    }
+
+    // window.localStorage.clear ()
+
+}
+
+function endQuiz(event) {
+
+
+
+
+
+    event.preventDefault()
+    saveInitials()
 
 }
 
@@ -167,7 +197,7 @@ function countdown() {
 
 
 
-    var timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
 
         if (timeLeft > 0) {
 
@@ -189,7 +219,7 @@ function countdown() {
     }, 1000);
 
 }
-endQuizButton.addEventListener ("click", endQuiz);
+endQuizButton.addEventListener("click", endQuiz);
 //End Countdown Function
 
 
