@@ -19,6 +19,7 @@ var quesListHide = document.getElementById("question-list")
 var formContainer = document.getElementById("form-container")
 var inputFormData = document.getElementById("input-form")
 var scoreTime = document.getElementById ("score-time")
+var allScores = document.getElementById ("all-scores")
 var clearButton = document.querySelector ("#clear")
 clearButton.textContent = "Clear Scores"
 var newQuiz = document.querySelector ("#new-quiz")
@@ -157,7 +158,7 @@ function saveInitials() {
 
     }
 
-    if (allInfo) {
+    if (endQuiz) {
         
         array = array.concat(JSON.parse(window.localStorage.getItem('user')||'[]'))
         
@@ -167,10 +168,17 @@ function saveInitials() {
         
         console.log (array)
         
+        for (i=0; i < array.length; i++) {
+        allScores.append ("User:   " + array[i].initials + "Score:   " + array[i].score)
         
- }
+        }
+        
+    }
+
+   
  clearInitials ()
  newQuizQues ()
+ 
     
 }
 
@@ -205,8 +213,9 @@ function newQuizQues () {
 function endQuiz(event) {
     
     event.preventDefault()
+    
     saveInitials()
-
+    
     
 
 }
@@ -241,11 +250,7 @@ endQuizButton.addEventListener("click", endQuiz);
 
 
 
-//variable to represent current question I am within
-//variable to represent how many points
-//function change question and button option and update points
-//change question by update currentquestionindex by increasing +1 call function to
-//populate buttons
+
 
 
 

@@ -58,3 +58,7 @@ justify-items: auto;
     
 }
 
+.all-scores {
+    display: flex;
+    
+}
