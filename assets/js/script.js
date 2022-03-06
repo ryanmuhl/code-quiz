@@ -18,11 +18,11 @@ var timeInterval;
 var quesListHide = document.getElementById("question-list")
 var formContainer = document.getElementById("form-container")
 var inputFormData = document.getElementById("input-form")
-var scoreTime = document.getElementById ("score-time")
-var allScores = document.getElementById ("all-scores")
-var clearButton = document.querySelector ("#clear")
-clearButton.textContent = "Clear Scores"
-var newQuiz = document.querySelector ("#new-quiz")
+var scoreTime = document.getElementById("score-time")
+var allScores = document.getElementById("all-scores")
+var clearButton = document.querySelector("#clear")
+clearButton.textContent = "Clear High Scores"
+var newQuiz = document.querySelector("#new-quiz")
 newQuiz.textContent = "New Quiz"
 
 
@@ -126,19 +126,19 @@ function nextQuestion() {
         mainHide.setAttribute("style", "display: none")
 
         quesListHide.removeAttribute("class", "hide")
-       
-       }
+
+    }
 }
 
 function inputForm() {
 
-    
+
     inputFormData.removeAttribute("class", "hide")
 
 
     quesListHide.remove()
 
-    
+
 
     scoreTime.append("Score:   " + timeLeft)
 
@@ -147,10 +147,10 @@ function inputForm() {
 
 function saveInitials() {
     var inputField = document.getElementById("input-field");
-    
+
     var inputData = inputField.value
     var array = []
-    
+
     var allInfo = {
 
         initials: inputData,
@@ -158,71 +158,87 @@ function saveInitials() {
 
     }
 
-    if (endQuiz) {
-        
-        array = array.concat(JSON.parse(window.localStorage.getItem('user')||'[]'))
-        
     
+
+    if (inputData) {
+        var listContent = document.createElement("li")
+        
+        
+
+        array = array.concat(JSON.parse(window.localStorage.getItem('user') || '[]'))
+
+
         array.push(allInfo)
-        window.localStorage.setItem ("user", JSON.stringify(array))
-        
-        console.log (array)
-        
-        for (i=0; i < array.length; i++) {
-        allScores.append ("User:   " + array[i].initials + "Score:   " + array[i].score)
-        
+        window.localStorage.setItem("user", JSON.stringify(array))
+
+        console.log(array)
+
+        for (i = 0; i < array.length; i++) {
+            
+            listContent.textContent = ("User:   " + array[i].initials + "Score:   " + array[i].score)
+            list.append(listContent)
+
         }
         
     }
 
-   
- clearInitials ()
- newQuizQues ()
- 
+    
+    clearInitials()
+    newQuizQues()
     
 }
 
 
-    
-  
-    
+
+
+
 
 function clearInitials(event) {
     var clearB = document.getElementById("clear")
-    clearB.removeAttribute ("class", "hide")
-    clearButton.addEventListener ("click", clearInitials)
+    clearB.removeAttribute("class", "hide")
+    clearButton.addEventListener("click", clearInitials)
 
-    console.log ()
-    
-    
+    console.log()
+
+
     if (event) {
-        window.localStorage.clear ()
+        window.localStorage.clear()
+        
+        var clearAllScores = document.getElementById ("list")
+        
+        clearAllScores.remove ()
+        event.preventDefault ()
+        
+        
+        
     }
-   
+    
+
 }
 
-function newQuizQues () {
-    var newQ = document.getElementById ("new-quiz")
-    newQ.removeAttribute ("class", "hide");
-    newQuiz.addEventListener ("click", newQuizQues)
+function newQuizQues() {
+    var newQ = document.getElementById("new-quiz")
+    newQ.removeAttribute("class", "hide");
+    newQuiz.addEventListener("click", newQuizQues)
 
 }
 
 
 
 function endQuiz(event) {
-    
+
     event.preventDefault()
-    
     saveInitials()
     
     
+
+
 
 }
 
 //Function that Decrements time by 1 second
 function countdown() {
-    
+
     timeInterval = setInterval(function () {
 
         if (timeLeft > 0) {
