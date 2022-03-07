@@ -1,35 +1,37 @@
 //Start Global variables/Elements 
 var body = document.body
-var timer = document.getElementById('countdown');
-var start = document.querySelector("#start-quiz");
+var currentQuestion;
+var timeInterval;
 var index = 0;
 var timeLeft = 40;
-var questionTitle = document.getElementById("question-title");
+
 var button1 = document.querySelector("#button1");
 var button2 = document.querySelector("#button2");
 var button3 = document.querySelector("#button3");
+var newQuiz = document.querySelector("#new-quiz")
+var clearButton = document.querySelector("#clear")
+var start = document.querySelector("#start-quiz");
+
+var timer = document.getElementById('countdown');
+var questionTitle = document.getElementById("question-title");
 var right = document.getElementById('result');
-button1.addEventListener("click", assessAnswers);
-button2.addEventListener("click", assessAnswers);
-button3.addEventListener("click", assessAnswers);
-start.addEventListener("click", startQuiz)
-var currentQuestion;
-var timeInterval;
 var quesListHide = document.getElementById("question-list")
 var formContainer = document.getElementById("form-container")
 var inputFormData = document.getElementById("input-form")
 var scoreTime = document.getElementById("score-time")
 var allScores = document.getElementById("all-scores")
-var clearButton = document.querySelector("#clear")
-clearButton.textContent = "Clear High Scores"
-var newQuiz = document.querySelector("#new-quiz")
-newQuiz.textContent = "New Quiz"
-
-
 var endQuizButton = document.getElementById("submit")
+
+button1.addEventListener("click", assessAnswers);
+button2.addEventListener("click", assessAnswers);
+button3.addEventListener("click", assessAnswers);
+start.addEventListener("click", startQuiz)
+
+clearButton.textContent = "Clear High Scores"
+newQuiz.textContent = "New Quiz"
 endQuizButton.textContent = "End Quiz"
 
-
+//Questions
 var quizQuestions = [
 
     {
@@ -51,12 +53,20 @@ var quizQuestions = [
     },
 
     {
+        ques: "Inside which HTML element do we put the JavaScript",
+        choices: ["<script>", "<js>", "<javascript"],
+        answer: "<script>"
+    },
+
+    {
         ques: "What is Ryan Uhl's favorite color:",
         choices: ["green", "orange", "yellow"],
         answer: "green"
     },
 
 ];
+//End Questions
+
 //End Global variables/Elements 
 
 
@@ -64,13 +74,11 @@ var quizQuestions = [
 
 
 //Function to start quiz and hide main section/welcome screen
-//also removes hidden display hidden for class hide
-//Populate Question function called within startQuiz function
-
+//starts countdown
+//starts first quiz question
 function startQuiz() {
     countdown()
     nextQuestion()
-
 }
 //End startQuiz Function
 
@@ -107,6 +115,9 @@ function assessAnswers(event) {
 
 }
 
+//Function to move to next set of quesitons when answer 
+//is selected.  If end of questions then time will stop 
+//and user will be taken to input form
 function nextQuestion() {
 
     if (index >= quizQuestions.length) {
@@ -129,70 +140,58 @@ function nextQuestion() {
 
     }
 }
+//End next Question Function
 
+
+//Function to remove question list div and un-hide form div
+//to display input fei
 function inputForm() {
-
-
     inputFormData.removeAttribute("class", "hide")
-
-
     quesListHide.remove()
-
-
-
     scoreTime.append("Score:   " + timeLeft)
 
 }
+//End input form Function
 
 
+//Function to input initials into form
+//then get high score and initials from local storage concat/parse data and push to array
+//then add data to array
+//then append to page
 function saveInitials() {
     var inputField = document.getElementById("input-field");
-
     var inputData = inputField.value
     var array = []
 
     var allInfo = {
-
         initials: inputData,
         score: timeLeft,
-
     }
-
-    
 
     if (inputData) {
         var listContent = document.createElement("li")
-        
-        
 
         array = array.concat(JSON.parse(window.localStorage.getItem('user') || '[]'))
-
-
         array.push(allInfo)
         window.localStorage.setItem("user", JSON.stringify(array))
 
         console.log(array)
 
         for (i = 0; i < array.length; i++) {
-            
+
             listContent.textContent = ("User:   " + array[i].initials + "Score:   " + array[i].score)
             list.append(listContent)
-
         }
-        
-    }
 
-    
+    }
     clearInitials()
     newQuizQues()
-    
+
 }
+//End Save initials Function
 
 
-
-
-
-
+//Function to clear initials/local storage when clear button selected
 function clearInitials(event) {
     var clearB = document.getElementById("clear")
     clearB.removeAttribute("class", "hide")
@@ -203,38 +202,35 @@ function clearInitials(event) {
 
     if (event) {
         window.localStorage.clear()
-        
-        var clearAllScores = document.getElementById ("list")
-        
-        clearAllScores.remove ()
-        event.preventDefault ()
-        
-        
-        
+
+        var clearAllScores = document.getElementById("list")
+
+        clearAllScores.remove()
+        event.preventDefault()
     }
-    
-
 }
+//End clear initls Function
 
+
+//Function to un-hide new quiz question button and make it clickable
+//Start New Quiz 
 function newQuizQues() {
     var newQ = document.getElementById("new-quiz")
     newQ.removeAttribute("class", "hide");
     newQuiz.addEventListener("click", newQuizQues)
 
 }
+//End new quiz question function
 
 
-
+//Function to end quiz by inputing initials 
+//and selecting end quiz button
 function endQuiz(event) {
-
     event.preventDefault()
     saveInitials()
-    
-    
-
-
-
 }
+//End of end Quiz function
+
 
 //Function that Decrements time by 1 second
 function countdown() {
@@ -261,8 +257,9 @@ function countdown() {
     }, 1000);
 
 }
-endQuizButton.addEventListener("click", endQuiz);
 //End Countdown Function
+
+endQuizButton.addEventListener("click", endQuiz);
 
 
 
