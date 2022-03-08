@@ -161,26 +161,26 @@ function inputForm() {
 function saveInitials() {
     var inputField = document.getElementById("input-field");
     var inputData = inputField.value
-    var array = []
+    var array = JSON.parse(window.localStorage.getItem('user')) || [];
 
     var allInfo = {
         initials: inputData,
         score: timeLeft,
     }
-
+    console.log (inputData)
     if (inputData) {
-        var listContent = document.createElement("li")
-
-        array = array.concat(JSON.parse(window.localStorage.getItem('user') || '[]'))
+       
         array.push(allInfo)
         window.localStorage.setItem("user", JSON.stringify(array))
 
         console.log(array)
-
+        console.log("inside if statement")
         for (i = 0; i < array.length; i++) {
 
+            var listContent = document.createElement("li")
             listContent.textContent = ("User:   " + array[i].initials + "Score:   " + array[i].score)
             list.append(listContent)
+            console.log ("inside for loop")
         }
 
     }
@@ -189,6 +189,8 @@ function saveInitials() {
 
 }
 //End Save initials Function
+
+
 
 
 //Function to clear initials/local storage when clear button selected
@@ -200,13 +202,13 @@ function clearInitials(event) {
     console.log()
 
 
-    if (event) {
+    if (event && list) {
         window.localStorage.clear()
 
         var clearAllScores = document.getElementById("list")
-
-        clearAllScores.remove()
         event.preventDefault()
+        clearAllScores.remove()
+        
     }
 }
 //End clear initls Function
